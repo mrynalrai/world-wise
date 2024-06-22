@@ -1,11 +1,8 @@
-import PageNav from "../components/PageNav";
-
 const PageNotFound: () => JSX.Element = () => {
     return <>
-        <PageNav />
-        <h1>
-            Page Not Found :(
-        </h1>
+        <div>
+            <h1>Page not found 😢</h1>
+        </div>
     </>
 }
 
