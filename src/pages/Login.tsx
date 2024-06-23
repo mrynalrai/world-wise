@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./Login.module.css";
-import PageNav from "../components/PageNav";
+import PageNav from "../components/pageNav/PageNav";
 
 const Login: () => JSX.Element = () => {
     const [email, setEmail] = useState("jack@example.com");

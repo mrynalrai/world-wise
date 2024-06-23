@@ -1,12 +1,14 @@
-import AppNav from "../components/AppNav";
+import Sidebar from "../components/sidebar/Sidebar";
+import Map from "../components/map/Map";
+import styles from "./AppLayout.module.css";
 
 const AppLayout: () => JSX.Element = () => {
-    return <>
-        <AppNav />
-        <h1>
-            App
-        </h1>
-    </>
+    return (
+        <div className={styles.app}>
+            <Sidebar />
+            <Map />
+        </div>
+    )
 }
 
 export default AppLayout;
