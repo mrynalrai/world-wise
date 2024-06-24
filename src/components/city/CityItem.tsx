@@ -7,11 +7,11 @@ type CityItemProps = {
     city: City
 }
 const CityItem: (props: CityItemProps) => JSX.Element = (props) => {
-    const { cityName, emoji, date, id } = props.city;
+    const { cityName, emoji, date, id, position } = props.city;
 
     return (
         <li>
-            <Link className={styles.cityItem} to={`${id}`} >
+            <Link className={styles.cityItem} to={`${id}?lat=${position.lat}&lng=${position.lng}`} >
                 <span className={styles.emoji} > {emoji} </span>
                 <h3 className={styles.name} > {cityName} </h3>
                 <time className={styles.date} > {formatDate(date)} </time>

@@ -15,7 +15,7 @@ import City from "./components/city/City";
 
 function App() {
     const { getCities } = useApiCities();
-    const [cities, setCities] = useState<City[]>([]);
+    const [cities, setCities] = useState<CityType[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     
 	function getCountries(cities: CityType[]) {
