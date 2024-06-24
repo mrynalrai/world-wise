@@ -11,6 +11,9 @@ const Map: () => JSX.Element = () => {
         <h1>
             Position: {lat}, {lng}
         </h1>
+        <button onClick={() => { setSearchParams({ lat: '23', lng: '50'})}}>
+            Change Pos
+        </button>
     </div>
 }
 
