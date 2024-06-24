@@ -1,22 +1,37 @@
 // "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
-
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./Form.module.css";
+import Button from "../button/Button";
 
-export function convertToEmoji(countryCode) {
-	const codePoints = countryCode
-		.toUpperCase()
-		.split("")
-		.map((char) => 127397 + char.charCodeAt());
-	return String.fromCodePoint(...codePoints);
-}
+// export function convertToEmoji(countryCode) {
+// 	const codePoints = countryCode
+// 		.toUpperCase()
+// 		.split("")
+// 		.map((char) => 127397 + char.charCodeAt());
+// 	return String.fromCodePoint(...codePoints);
+// }
 
 const Form: () => JSX.Element = () => {
+	const navigate = useNavigate();
+
 	const [cityName, setCityName] = useState<string>("");
 	const [country, setCountry] = useState<string>("");
 	const [date, setDate] = useState<string>(new Date().toDateString());
 	const [notes, setNotes] = useState("");
+
+	function handleAdd (args: unknown): void {
+		// TODO
+		const [e, msg] = [...(args as unknown[])];
+		(e as Event).preventDefault();
+		console.log(msg);
+	}
+
+	function handleBack (args: unknown): void {
+		(args as Event).preventDefault();
+		navigate(-1);
+	}
 
 	return (
 		<form className={styles.form}>
@@ -49,8 +64,8 @@ const Form: () => JSX.Element = () => {
 			</div>
 
 			<div className={styles.buttons}>
-				<button>Add</button>
-				<button>&larr; Back</button>
+				<Button onClick={(e) => handleAdd([e, "add"])} type="primary">Add</Button>
+				<Button onClick={handleBack} type="back">&larr; Back</Button>
 			</div>
 		</form>
 	);

@@ -12,6 +12,7 @@ import CityList from "./components/city/CityList";
 import Country from "./types/Country";
 import CountryList from "./components/country/CountryList";
 import City from "./components/city/City";
+import Form from "./components/form/Form";
 
 function App() {
     const { getCities } = useApiCities();
@@ -76,7 +77,7 @@ function App() {
 								<CountryList countries={countries} isLoading={isLoading} />
 							}  
 						/>
-						<Route path="form" element={<p> Form</p>} />
+						<Route path="form" element={<Form />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>
