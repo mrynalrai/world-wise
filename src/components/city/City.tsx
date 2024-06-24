@@ -1,23 +1,13 @@
 import styles from "./City.module.css";
+import formatDate from "../../utils/formatDate"
+import CityType from "../../types/City";
 
-const formatDate = (date: string) =>
-	new Intl.DateTimeFormat("en", {
-		day: "numeric",
-		month: "long",
-		year: "numeric",
-		weekday: "long",
-	}).format(new Date(date));
+type CityProps = {
+	cityItem: CityType
+}
 
-const City: () => JSX.Element = () => {
-	// TEMP DATA
-	const currentCity = {
-		cityName: "Lisbon",
-		emoji: "🇵🇹",
-		date: "2027-10-31T15:59:59.138Z",
-		notes: "My favorite city so far!",
-	};
-
-	const { cityName, emoji, date, notes } = currentCity;
+const City: (props: CityProps) => JSX.Element = (props) => {
+	const { cityName, emoji, date, notes } = props.cityItem;
 
 	return (
 		<div className={styles.city}>
