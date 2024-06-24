@@ -1,13 +1,28 @@
 import styles from "./City.module.css";
 import formatDate from "../../utils/formatDate"
 import CityType from "../../types/City";
+import { useMemo } from "react";
+import { useParams } from "react-router-dom";
+import Message from "../message/Message";
 
 type CityProps = {
-	cityItem: CityType
+	cities: CityType[]
 }
 
 const City: (props: CityProps) => JSX.Element = (props) => {
-	const { cityName, emoji, date, notes } = props.cityItem;
+	const { id } = useParams();
+	
+	const city: CityType | null = useMemo(() => {
+		if (id) {
+			return props.cities.find(city => city.id.toString() === id) ?? null;
+		} 
+		return null;
+	}, [id, props.cities])
+
+	if (city === null)
+		return <Message message="No city with the selected id was found :(" />
+
+	const { cityName, emoji, date, notes } = city;
 
 	return (
 		<div className={styles.city}>
@@ -45,7 +60,7 @@ const City: (props: CityProps) => JSX.Element = (props) => {
 			</div>
 
 			<div>
-				<ButtonBack />
+				{/* <ButtonBack /> */}
 			</div>
 		</div>
 	);

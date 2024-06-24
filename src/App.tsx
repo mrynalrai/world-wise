@@ -7,18 +7,19 @@ import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./pages/AppLayout";
 import Login from "./pages/Login";
 import useApiCities from "./hooks/useApiCities";
-import City from "./types/City";
+import CityType from "./types/City";
 import CityList from "./components/city/CityList";
 import Country from "./types/Country";
 import CountryList from "./components/country/CountryList";
+import City from "./components/city/City";
 
 function App() {
     const { getCities } = useApiCities();
     const [cities, setCities] = useState<City[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     
-	function getCountries(cities: City[]) {
-		return cities.reduce((countries: Country[], city: City) => {
+	function getCountries(cities: CityType[]) {
+		return cities.reduce((countries: Country[], city: CityType) => {
 			if (countries.find(country => city.country === country.country))
 				return countries;
 			else {
@@ -70,6 +71,7 @@ function App() {
 								<CityList cities={cities} isLoading={isLoading} />
 							} 
 						/>
+						<Route path="cities/:id" element={<City cities={cities}/>} />
 						<Route path="countries" element={
 								<CountryList countries={countries} isLoading={isLoading} />
 							}  
