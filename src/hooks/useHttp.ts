@@ -6,7 +6,6 @@ type UseHttp = {
 
 const formatUrl = (partialUrl: string): string => {
     const url = `${import.meta.env.VITE_API_URL}/${partialUrl}`;
-	console.log(url);
 	return url;
 };
 

@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Product from "./pages/Product";
@@ -6,15 +7,35 @@ import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./pages/AppLayout";
 import Login from "./pages/Login";
 import useApiCities from "./hooks/useApiCities";
-import { useEffect, useState } from "react";
 import City from "./types/City";
 import CityList from "./components/city/CityList";
+import Country from "./types/Country";
+import CountryList from "./components/country/CountryList";
 
 function App() {
     const { getCities } = useApiCities();
     const [cities, setCities] = useState<City[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     
+	function getCountries(cities: City[]) {
+		return cities.reduce((countries: Country[], city: City) => {
+			if (countries.find(country => city.country === country.country))
+				return countries;
+			else {
+				const newCountry: Country = {
+					country: city.country,
+					emoji: city.emoji
+				}
+				return [...countries, newCountry];
+			}
+		}, [])
+	}
+
+	const countries: Country[] = useMemo(() => {
+		// Get Country List from cities
+		return getCountries(cities);
+	}, [cities])
+
     useEffect(() => {
         const fetchCities = async () => {
             setIsLoading(true);
@@ -49,7 +70,10 @@ function App() {
 								<CityList cities={cities} isLoading={isLoading} />
 							} 
 						/>
-						<Route path="countries" element={<p> List of Countries</p>} />
+						<Route path="countries" element={
+								<CountryList countries={countries} isLoading={isLoading} />
+							}  
+						/>
 						<Route path="form" element={<p> Form</p>} />
 					</Route>
 				</Routes>
